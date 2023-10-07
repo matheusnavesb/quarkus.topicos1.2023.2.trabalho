@@ -1,0 +1,65 @@
+package br.unitins.service;
+
+import java.util.List;
+
+import br.unitins.dto.ProdutoDTO;
+import br.unitins.dto.ProdutoResponseDTO;
+import br.unitins.model.Produto;
+import br.unitins.repository.ProdutoRepository;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+
+@ApplicationScoped
+public class ProdutoServiceIpml implements ProdutoService{
+
+    @Inject
+    ProdutoRepository repository;
+
+    @Override
+    @Transactional
+    public ProdutoResponseDTO update(ProdutoDTO dto, Long id) {
+        Produto produto = repository.findById(id);
+
+        if(repository.findById(id) == null || produto.getId() == null){
+            
+            produto.setId(id);
+            produto.setNome(dto.nome());
+            produto.setDescricao(dto.descricao());
+            produto.setPreco(dto.preco());
+            produto.setEstoque(dto.estoque());
+
+            }
+        
+        return ProdutoResponseDTO.valueOf(produto);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+    }
+
+    @Override
+    public ProdutoResponseDTO findById(Long id) {
+        return ProdutoResponseDTO.valueOf(repository.findById(id));
+    }
+
+    @Override
+    public List<ProdutoResponseDTO> findByNome(String nome) {
+             return null;
+    }
+
+    @Override
+    public List<ProdutoResponseDTO> findByAll() {
+        return repository.listAll().stream()
+            .map(e -> ProdutoResponseDTO.valueOf(e)).toList();
+    }
+
+    @Override
+    public ProdutoResponseDTO insert(ProdutoDTO dto) {
+       
+        throw new UnsupportedOperationException("Unimplemented method 'insert'");
+    }
+    
+    
+}
