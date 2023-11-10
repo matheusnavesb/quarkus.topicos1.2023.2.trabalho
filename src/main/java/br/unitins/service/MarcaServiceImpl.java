@@ -14,7 +14,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
 @ApplicationScoped
-public class MarcaServiceIpml implements MarcaService{
+public class MarcaServiceImpl implements MarcaService{
 
     @Inject
     MarcaRepository repository;

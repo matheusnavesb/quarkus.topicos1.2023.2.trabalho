@@ -11,7 +11,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
 @ApplicationScoped
-public class ProdutoServiceIpml implements ProdutoService{
+public class ProdutoServiceImpl implements ProdutoService{
 
     @Inject
     ProdutoRepository repository;
