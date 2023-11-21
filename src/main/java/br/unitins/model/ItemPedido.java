@@ -16,7 +16,7 @@ public class ItemPedido extends DefaultEntity {
     private Produto produto;
 
     @ManyToOne
-    @JoinColumn(name="id_pedidos")
+    @JoinColumn(name="id_pedido")
     private Pedido pedido;
 
     public Integer getQuantidade() {

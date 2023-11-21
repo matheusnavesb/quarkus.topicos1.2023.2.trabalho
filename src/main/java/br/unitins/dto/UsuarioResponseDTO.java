@@ -15,6 +15,10 @@ public record UsuarioResponseDTO(
 ) {
     public static UsuarioResponseDTO valueOf(Usuario usuario){
 
+        if(usuario == null){
+            return null;
+        }
+        
         return new UsuarioResponseDTO(
             usuario.getId(),
             usuario.getNome(),

@@ -27,7 +27,7 @@ public class UsuarioServiceImpl implements UsuarioService{
     public UsuarioResponseDTO insert(@Valid UsuarioDTO dto) {
 
        if (repository.findByLogin(dto.login()) != null) {
-            throw new ValidationException("login", "Login já existe.");
+            throw new ValidationException("login", "O login informado já existe, informe outro.");
         }
 
         Usuario novoUsuario = new Usuario();
@@ -38,6 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService{
         if (dto.listaTelefone() != null && 
                     !dto.listaTelefone().isEmpty()){
             novoUsuario.setListaTelefone(new ArrayList<Telefone>());
+
             for (TelefoneDTO tel : dto.listaTelefone()) {
                 Telefone telefone = new Telefone();
                 telefone.setCodigoArea(tel.codigoArea());
@@ -59,9 +60,14 @@ public class UsuarioServiceImpl implements UsuarioService{
         usuario.setNome(dto.nome());
         usuario.setSenha(dto.senha());
 
-        // falta a implementacao dos telefones
-        // vcs (ALUNOS) devem implementar!!!!!
-        
+        List<Telefone> telefones = new ArrayList<>();
+                for (TelefoneDTO tel : dto.listaTelefone()) {
+                    Telefone telefone = new Telefone();
+                    telefone.setCodigoArea(tel.codigoArea());
+                    telefone.setNumero(tel.numero());
+                    telefones.add(telefone);
+                }
+
         return UsuarioResponseDTO.valueOf(usuario);
     }
 
@@ -103,5 +109,6 @@ public class UsuarioServiceImpl implements UsuarioService{
         
         return UsuarioResponseDTO.valueOf(usuario);
     }
+
     
 }

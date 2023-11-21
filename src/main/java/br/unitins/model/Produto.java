@@ -1,20 +1,24 @@
 package br.unitins.model;
 
-import jakarta.persistence.Column;
+//import org.hibernate.annotations.Check;
+
 import jakarta.persistence.Entity;
 
 @Entity
 public class Produto extends DefaultEntity {
 
-    @Column(length = 50)
     private String nome;
 
-    @Column(length = 120)
     private String descricao;
+
+    private Categoria categoria;
 
     private Double preco;
 
+    //@Check(constraints = "estoque >= 0")
     private Integer estoque;
+    
+    private String nomeImagem;
 
     public String getNome() {
         return nome;
@@ -46,6 +50,22 @@ public class Produto extends DefaultEntity {
 
     public void setEstoque(Integer estoque) {
         this.estoque = estoque;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getNomeImagem() {
+        return nomeImagem;
+    }
+
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
     }
 
     
